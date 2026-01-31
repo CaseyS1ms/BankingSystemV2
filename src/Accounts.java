@@ -73,10 +73,7 @@ public class Accounts
         return accountIn == this.account_No;
     }//auth function
 
-    public void switchAccount()
-    {
 
-    }//switch account function
 
     public void accountDetails()
     {

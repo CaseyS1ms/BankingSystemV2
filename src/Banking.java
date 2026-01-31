@@ -73,23 +73,33 @@ public class Banking
         {
             switch (menuI) {
                 case 1:
-                    //amount input
+                    System.out.println("How much do you want to deposit:");
+                    amount = input.nextInt();
+                    input.nextLine();
                     account.deposit(amount);
+
                     break;
                 case 2:
-                    //amount input
+                    System.out.println("How much do you want to withdraw:");
+                    amount = input.nextInt();
+                    input.nextLine();
                     account.withdraw(amount);
                     break;
                 case 3:
-                    //amount input
-                    //account number to send to
-                    //sendmoney();
+                    System.out.println("What account do you want to send to:");
+                    toaccount = input.nextInt();
+                    input.nextLine();
+                    System.out.println("How much do you want to send:");
+                    amount = input.nextInt();
+                    input.nextLine();
+                    sendmoney(amount,toaccount);
                     break;
                 case 4:
-                    account.checkBalance();
+                    System.out.println("£" + account.checkBalance());
                     break;
                 case 5:
                     System.out.println(account.checkAccount());
+                    account.transactionHistory();
                     break;
                 case 6:
                     logout();
@@ -139,6 +149,33 @@ public class Banking
             System.out.println("Account Number: " + t.account_No + " Name: " + t.name);
         }
     } //list accounts function
+
+
+    public void sendmoney(int amount, int accountnumber)
+    {
+        Accounts recipient = null;
+
+        for(Accounts acc: accountsList)
+        {
+            if(acc.account_No == accountnumber)
+            {
+                recipient = acc;
+                break;
+            }
+        }
+
+        if (recipient != null)
+        {
+            account.withdraw(amount);
+            recipient.deposit(amount);
+            System.out.println("Transaction Succesfull");
+        }
+        else
+        {
+            System.out.println("Failure");
+        }
+
+    } //send money function
 
 
 
