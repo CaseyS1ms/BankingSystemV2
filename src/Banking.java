@@ -1,14 +1,19 @@
+import java.io.File;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class Banking
 {
 
     static Accounts account;
     static Scanner input;
+
     static int menuI;
 
     static ArrayList<Accounts> accountsList = new ArrayList<>();
+
 
     public Banking()
     {
@@ -24,8 +29,11 @@ public class Banking
         String inname = "JohnClyde";
         account = new Accounts(inname);
         accountsList.add(account);
-
+        updateAccountsList();
         Banking bank = new Banking();
+
+
+
         bank.run();
 
 
@@ -39,6 +47,7 @@ public class Banking
         String name = input.nextLine();
         account = new Accounts(name);
         accountsList.add(account);
+        updateAccountsList();
 
         System.out.println("Your Details are as follows. \nAccount Number: " + account.account_No);
     }//create account function
@@ -176,6 +185,22 @@ public class Banking
         }
 
     } //send money function
+
+
+    public static void updateAccountsList()
+    {
+        try(FileWriter writer = new FileWriter("AccountsList.txt"))
+        {
+            for(Accounts acc : accountsList)
+            {
+                writer.write(acc.account_No + "," + acc.name + "," + acc.bal + "\n");
+            }
+        }
+        catch (IOException e)
+        {
+            System.out.println("An Error has occurred");
+        }
+    }// update accounts list function
 
 
 

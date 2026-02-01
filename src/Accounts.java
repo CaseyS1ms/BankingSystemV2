@@ -1,5 +1,7 @@
 import java.util.ArrayList;
 import java.util.Random;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class Accounts
 {
@@ -14,14 +16,24 @@ public class Accounts
 
 
 
+
     public Accounts(String inname)
     {
         transactionH = new ArrayList<String>();
         rand = new Random();
-
         bal = 0;
         name = inname;
         account_No = rand.nextInt(90000) + 10000;
+
+        try ( FileWriter writer = new FileWriter("//Users//caseysims//IdeaProjects//BankingSystemV2//transactionHistory//" + this.account_No + "History.txt",true))
+        {
+            System.out.println("File Successfully Created");
+
+        }
+        catch (IOException e)
+        {
+            System.out.println("An Error has Occurred");
+        }
     }
 
 
