@@ -7,40 +7,48 @@ public class Accounts
 {
 
 
-    int account_No;
-    String name;
-    int bal;
+    private int account_No;
+    private String name;
+    private int bal;
+    private ArrayList<String> transactionH;
+    Random rand;
 
-    static ArrayList<String> transactionH;
-    static Random rand;
-
-
-
-
-    public Accounts(String inname)
+    public Accounts(int account_number, String inname, int balance)
     {
         transactionH = new ArrayList<String>();
         rand = new Random();
-        bal = 0;
+        bal = balance;
         name = inname;
-        account_No = rand.nextInt(90000) + 10000;
+        account_No = account_number;
 
-        try ( FileWriter writer = new FileWriter("//Users//caseysims//IdeaProjects//BankingSystemV2//transactionHistory//" + this.account_No + "History.txt",true))
-        {
-            System.out.println("File Successfully Created");
 
-        }
-        catch (IOException e)
-        {
-            System.out.println("An Error has Occurred");
-        }
+    } //constructor
+
+    //GETTERS
+    public int getBal()
+    {
+        return bal;
     }
+
+    public int getAccount_No()
+    {
+        return account_No;
+    }
+
+    public String getName()
+    {
+        return name;
+    }
+
+
+
 
 
     public int deposit(int amount)
     {
     this.bal += amount;
     transactionH.add("Deposit: " + amount);
+    updateTransactionHistory(amount, "Deposit");
     return this.bal;
 
     } //deposit function
@@ -49,12 +57,14 @@ public class Accounts
     {
         if(amount > this.bal)
         {
-            System.out.println("Withdraw failed: insufficient funds");
             transactionH.add("Attempted Withdrawal");
+            return 1;
+
         }else
         {
             this.bal -= amount;
             transactionH.add("Withdraw: " + amount);
+            updateTransactionHistory(amount, "Withdraw");
 
         }
         return this.bal;
@@ -90,6 +100,28 @@ public class Accounts
     public void accountDetails()
     {
         System.out.println("name: " + this.name + "\naccount number: " + this.account_No);
+    }
+
+
+    public void updateTransactionHistory(int amount,String type)
+    {
+        try ( FileWriter writer = new FileWriter("//Users//caseysims//IdeaProjects//BankingSystemV2//transactionHistory//" + this.account_No + "History.txt",true))
+        {
+            if(type == "Withdraw")
+            {
+                writer.append("Withdraw: " + amount + "\n");
+            }
+            else if(type == "Deposit")
+            {
+                writer.append("Deposit: " + amount + "\n");
+            }
+
+
+        }
+        catch (IOException e)
+        {
+            System.out.println("An Error has Occurred");
+        }
     }
 
 

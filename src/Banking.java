@@ -3,16 +3,20 @@ import java.util.Scanner;
 import java.util.ArrayList;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.FileNotFoundException;
+import java.util.Random;
 
 public class Banking
 {
 
-    static Accounts account;
-    static Scanner input;
+    Accounts account;
+    Scanner input;
+    Random rand;
+    ArrayList<Accounts> accountsList = new ArrayList<>();
 
-    static int menuI;
+    int menuI;
 
-    static ArrayList<Accounts> accountsList = new ArrayList<>();
+
 
 
     public Banking()
@@ -26,10 +30,10 @@ public class Banking
 
     public static void main(String[] args)
     {
-        String inname = "JohnClyde";
-        account = new Accounts(inname);
-        accountsList.add(account);
-        updateAccountsList();
+//        String inname = "JohnClyde";
+//        account = new Accounts(87692,inname,0);
+//        accountsList.add(account);
+//        updateAccountsList();
         Banking bank = new Banking();
 
 
@@ -43,13 +47,15 @@ public class Banking
 
     public void createAccount()
     {
+        rand = new Random();
         System.out.println("Welcome to WIS Banking, Please type in your name:");
         String name = input.nextLine();
-        account = new Accounts(name);
+        int accountN = rand.nextInt(90000) + 1000;
+        account = new Accounts(accountN,name,0);
         accountsList.add(account);
         updateAccountsList();
 
-        System.out.println("Your Details are as follows. \nAccount Number: " + account.account_No);
+        System.out.println("Your Details are as follows. \nAccount Number: " + account.getAccount_No());
     }//create account function
 
     public void run()
@@ -74,9 +80,10 @@ public class Banking
     {
         int amount = 0;
         int toaccount; //account number to send to
-        System.out.println("Welcome: " + account.name);
+        System.out.println("Welcome: " + account.getName());
         System.out.println("==========\n 1.Deposit\n 2.Withdraw\n 3.Send Money\n 4.Check Balance\n 5.Check Details\n 6.Logout\n==========");
         menuI = input.nextInt();
+        input.nextLine();
 
         while(menuI != 7)
         {
@@ -120,22 +127,28 @@ public class Banking
                     listAccounts();
                     break;
             }
-            System.out.println("Welcome: " + account.name);
+            System.out.println("Welcome: " + account.getName());
             System.out.println("==========\n 1.Deposit\n 2.Withdraw\n 3.Send Money\n 4.Check Balance\n 5.Check Details\n 6.Logout\n==========");
             menuI = input.nextInt();
+            input.nextLine();
         }
     } // Main menu function
 
     public Boolean login()
     {
         //checking if there is any accounts
+        loadAccounts();
+        if(account == null)
+        {
+            createAccount();
+        }
         System.out.println("Welcome please enter Account Number: ");
         int inputNumber = input.nextInt();
         input.nextLine();
 
         for(Accounts acc: accountsList)
         {
-            if(acc.account_No == inputNumber)
+            if(acc.getAccount_No() == inputNumber)
             {
                 account = acc;
                 return true;
@@ -155,7 +168,7 @@ public class Banking
     {
         for(Accounts t: accountsList)
         {
-            System.out.println("Account Number: " + t.account_No + " Name: " + t.name);
+            System.out.println("Account Number: " + t.getAccount_No() + " Name: " + t.getName());
         }
     } //list accounts function
 
@@ -166,7 +179,7 @@ public class Banking
 
         for(Accounts acc: accountsList)
         {
-            if(acc.account_No == accountnumber)
+            if(acc.getAccount_No() == accountnumber)
             {
                 recipient = acc;
                 break;
@@ -175,9 +188,17 @@ public class Banking
 
         if (recipient != null)
         {
-            account.withdraw(amount);
-            recipient.deposit(amount);
-            System.out.println("Transaction Succesfull");
+            if(account.withdraw(amount) == 1)
+            {
+                System.out.println("Not enough funds to transfer.");
+            }
+            else
+            {
+                recipient.deposit(amount);
+                System.out.println("Transaction Succesfull");
+            }
+
+
         }
         else
         {
@@ -187,13 +208,13 @@ public class Banking
     } //send money function
 
 
-    public static void updateAccountsList()
+    public void updateAccountsList()
     {
         try(FileWriter writer = new FileWriter("AccountsList.txt"))
         {
             for(Accounts acc : accountsList)
             {
-                writer.write(acc.account_No + "," + acc.name + "," + acc.bal + "\n");
+                writer.write(acc.getAccount_No() + "," + acc.getName() + "," + acc.getBal() + "\n");
             }
         }
         catch (IOException e)
@@ -201,6 +222,30 @@ public class Banking
             System.out.println("An Error has occurred");
         }
     }// update accounts list function
+
+
+    public void loadAccounts()
+    {
+
+        File accL = new File("AccountsList.txt");
+
+        try(Scanner read = new Scanner(accL))
+        {
+            while(read.hasNextLine())
+            {
+                String data = read.nextLine();
+                String regex = "[,]";
+                String[] myArray = data.split(regex);
+                account = new Accounts(Integer.parseInt(myArray[0]), myArray[1],Integer.parseInt(myArray[2]));
+                accountsList.add(account);
+            }
+        }
+        catch (FileNotFoundException e)
+        {
+            System.out.println("File Not Found");
+        }
+
+    }
 
 
 
