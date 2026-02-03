@@ -51,7 +51,10 @@ public class Banking
         System.out.println("Welcome to WIS Banking, Please type in your name:");
         String name = input.nextLine();
         int accountN = rand.nextInt(90000) + 1000;
-        account = new Accounts(accountN,name,0);
+        System.out.println("Please input a pin:");
+        String pin = input.nextLine();
+
+        account = new Accounts(accountN,name,0,pin);
         accountsList.add(account);
         updateAccountsList();
 
@@ -93,6 +96,7 @@ public class Banking
                     amount = input.nextInt();
                     input.nextLine();
                     account.deposit(amount);
+                    updateAccountsList();
 
                     break;
                 case 2:
@@ -100,6 +104,7 @@ public class Banking
                     amount = input.nextInt();
                     input.nextLine();
                     account.withdraw(amount);
+                    updateAccountsList();
                     break;
                 case 3:
                     System.out.println("What account do you want to send to:");
@@ -109,13 +114,16 @@ public class Banking
                     amount = input.nextInt();
                     input.nextLine();
                     sendmoney(amount,toaccount);
+
                     break;
                 case 4:
                     System.out.println("£" + account.checkBalance());
                     break;
                 case 5:
                     System.out.println(account.checkAccount());
+                    System.out.println("Pin: " + account.getPin());
                     account.transactionHistory();
+
                     break;
                 case 6:
                     logout();
@@ -150,8 +158,22 @@ public class Banking
         {
             if(acc.getAccount_No() == inputNumber)
             {
-                account = acc;
-                return true;
+                System.out.println("Please Enter Pin Number: ");
+                String PinN = input.nextLine();
+                for(Accounts acc1 : accountsList)
+                {
+                    if(acc1.getPin() == PinN)
+                    {
+                        account = acc;
+                        return true;
+                    }
+                    else
+                    {
+                        System.out.println("Wrong Pin Number");
+                        return false;
+                    }
+                }
+
             }
         }
         return false;
@@ -195,6 +217,7 @@ public class Banking
             else
             {
                 recipient.deposit(amount);
+                updateAccountsList();
                 System.out.println("Transaction Succesfull");
             }
 
@@ -214,7 +237,7 @@ public class Banking
         {
             for(Accounts acc : accountsList)
             {
-                writer.write(acc.getAccount_No() + "," + acc.getName() + "," + acc.getBal() + "\n");
+                writer.write(acc.getAccount_No() + "," + acc.getName() + "," + acc.getBal() + "," + acc.getPin() + "\n");
             }
         }
         catch (IOException e)
@@ -236,7 +259,7 @@ public class Banking
                 String data = read.nextLine();
                 String regex = "[,]";
                 String[] myArray = data.split(regex);
-                account = new Accounts(Integer.parseInt(myArray[0]), myArray[1],Integer.parseInt(myArray[2]));
+                account = new Accounts(Integer.parseInt(myArray[0]), myArray[1],Integer.parseInt(myArray[2]), myArray[3]);
                 accountsList.add(account);
             }
         }

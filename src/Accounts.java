@@ -10,16 +10,18 @@ public class Accounts
     private int account_No;
     private String name;
     private int bal;
+    private String pin;
     private ArrayList<String> transactionH;
     Random rand;
 
-    public Accounts(int account_number, String inname, int balance)
+    public Accounts(int account_No, String name, int bal, String pin)
     {
         transactionH = new ArrayList<String>();
         rand = new Random();
-        bal = balance;
-        name = inname;
-        account_No = account_number;
+        this.bal = bal;
+        this.name = name;
+        this.account_No = account_No;
+        this.pin = pin;
 
 
     } //constructor
@@ -38,6 +40,11 @@ public class Accounts
     public String getName()
     {
         return name;
+    }
+
+    public String getPin()
+    {
+        return pin;
     }
 
 
