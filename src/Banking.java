@@ -1,5 +1,4 @@
 import java.io.File;
-import java.util.Objects;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.io.FileWriter;
@@ -10,20 +9,11 @@ import java.util.Random;
 public class Banking
 {
 
-    private Accounts account;
-    private Scanner input;
-    private Random rand;
-    private ArrayList<Accounts> accountsList = new ArrayList<>();
+    private Account account;
+
+    private ArrayList<Account> accountsList = new ArrayList<>();
 
 
-    public Banking()
-    {
-
-
-        input = new Scanner(System.in);
-
-
-    }
 
     public static void main(String[] args)
     {
@@ -33,19 +23,19 @@ public class Banking
     //GETTERS
 
 
-    public Accounts getAccount() {
+    public Account getAccount() {
         return account;
-    } // Accounts Getter
+    } // Account Getter
 
-    public ArrayList<Accounts> getAccountsList() {
+    public ArrayList<Account> getAccountsList() {
         return accountsList;
-    } // Accounts List Getter
+    } // Account List Getter
 
     public int createAccount(String name, String pin)
     {
-        rand = new Random();
+        Random rand = new Random();
         int accountN = rand.nextInt(90000) + 1000;
-        account = new Accounts(accountN,name,0,pin);
+        account = new Account(accountN,name,0,pin);
         accountsList.add(account);
         updateAccountsList();
 
@@ -60,9 +50,9 @@ public class Banking
 
         //enter account number
 
-        for(Accounts acc: accountsList)
+        for(Account acc: accountsList)
         {
-            if(acc.getAccount_No() == inputNumber)
+            if(acc.getAccountNumber() == inputNumber)
             {
                 //enter pin number
 
@@ -93,11 +83,11 @@ public class Banking
 
     public String sendmoney(int amount, int accountnumber)
     {
-        Accounts recipient = null;
+        Account recipient = null;
 
-        for(Accounts acc: accountsList)
+        for(Account acc: accountsList)
         {
-            if(acc.getAccount_No() == accountnumber)
+            if(acc.getAccountNumber() == accountnumber)
             {
                 recipient = acc;
                 break;
@@ -106,7 +96,7 @@ public class Banking
 
         if (recipient != null)
         {
-            if(account.withdraw(amount) == 1)
+            if(!account.withdraw(amount))
             {
                 return "Failure: Not enough Funds";
             }
@@ -131,9 +121,9 @@ public class Banking
     {
         try(FileWriter writer = new FileWriter("AccountsList.txt"))
         {
-            for(Accounts acc : accountsList)
+            for(Account acc : accountsList)
             {
-                writer.write(acc.getAccount_No() + "," + acc.getName() + "," + acc.getBal() + "," + acc.getPin() + "\n");
+                writer.write(acc.getAccountNumber() + "," + acc.getName() + "," + acc.getBalance() + "," + acc.getPin() + "\n");
             }
         }
         catch (IOException e)
@@ -156,7 +146,7 @@ public class Banking
                 String data = read.nextLine();
                 String regex = "[,]";
                 String[] myArray = data.split(regex);
-                account = new Accounts(Integer.parseInt(myArray[0]), myArray[1],Integer.parseInt(myArray[2]), myArray[3]);
+                account = new Account(Integer.parseInt(myArray[0]), myArray[1],Integer.parseInt(myArray[2]), myArray[3]);
                 accountsList.add(account);
             }
         }
