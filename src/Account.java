@@ -1,40 +1,39 @@
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Random;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class Accounts
+public class Account
 {
 
 
-    private int account_No;
+    private int accountNumber;
     private String name;
-    private int bal;
+    private int balance;
     private String pin;
     private ArrayList<String> transactionH;
-    Random rand;
 
-    public Accounts(int account_No, String name, int bal, String pin)
+    public Account(int accountNumber, String name, int balance, String pin)
     {
         transactionH = new ArrayList<String>();
-        rand = new Random();
-        this.bal = bal;
+        this.balance = balance;
         this.name = name;
-        this.account_No = account_No;
+        this.accountNumber = accountNumber;
         this.pin = pin;
 
 
     } //constructor
 
     //GETTERS
-    public int getBal()
+    public int getBalance()
     {
-        return bal;
+        return balance;
     }
 
-    public int getAccount_No()
+    public int getAccountNumber()
     {
-        return account_No;
+        return accountNumber;
     }
 
     public String getName()
@@ -53,28 +52,28 @@ public class Accounts
 
     public int deposit(int amount)
     {
-    this.bal += amount;
+    this.balance += amount;
     transactionH.add("Deposit: " + amount);
     updateTransactionHistory(amount, "Deposit");
-    return this.bal;
+    return this.balance;
 
     } //deposit function
 
-    public int withdraw(int amount)
+    public boolean withdraw(int amount)
     {
-        if(amount > this.bal)
+        if(amount > this.balance)
         {
             transactionH.add("Attempted Withdrawal");
-            return 1;
+            return false;
 
         }else
         {
-            this.bal -= amount;
+            this.balance -= amount;
             transactionH.add("Withdraw: " + amount);
             updateTransactionHistory(amount, "Withdraw");
-
+            return true;
         }
-        return this.bal;
+
     }//withdraw function
 
     public void transactionHistory()
@@ -89,36 +88,36 @@ public class Accounts
 
     public Integer checkBalance()
     {
-        return this.bal;
+        return this.balance;
     }//check Balance function
 
     public int checkAccount()
     {
-        return this.account_No;
+        return this.accountNumber;
     }//check account function
 
     public Boolean auth(int accountIn)
     {
-        return accountIn == this.account_No;
+        return accountIn == this.accountNumber;
     }//auth function
 
 
 
     public void accountDetails()
     {
-        System.out.println("name: " + this.name + "\naccount number: " + this.account_No);
+        System.out.println("name: " + this.name + "\naccount number: " + this.accountNumber);
     }
 
 
     public void updateTransactionHistory(int amount,String type)
     {
-        try ( FileWriter writer = new FileWriter("//Users//caseysims//IdeaProjects//BankingSystemV2//transactionHistory//" + this.account_No + "History.txt",true))
+        try ( FileWriter writer = new FileWriter("//Users//caseysims//IdeaProjects//BankingSystemV2//transactionHistory//" + this.accountNumber + "History.txt",true))
         {
-            if(type == "Withdraw")
+            if("Withdraw".equals(type))
             {
                 writer.append("Withdraw: " + amount + "\n");
             }
-            else if(type == "Deposit")
+            else if("Deposit".equals(type))
             {
                 writer.append("Deposit: " + amount + "\n");
             }
