@@ -13,7 +13,10 @@ public class Banking
 
     private ArrayList<Account> accountsList = new ArrayList<>();
 
-
+    public Banking()
+    {
+        loadAccounts();
+    }
 
     public static void main(String[] args)
     {
@@ -45,7 +48,7 @@ public class Banking
     public Boolean login(int inputNumber, String pinN)
     {
         //checking if there is any accounts
-        loadAccounts();
+
         //check account did go here
 
         //enter account number
