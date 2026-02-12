@@ -6,9 +6,12 @@ import javafx.stage.Stage;
 public class Gui extends Application
 {
 
+
+
     private Login login;
     private Banking banking;
     private MainScreen mainScreen;
+    private CreateAccount createAccountScreen;
     private Stage primaryStage;
 
     public Gui()
@@ -28,6 +31,7 @@ public class Gui extends Application
         banking = new Banking();
 
         showLoginScreen();
+
 
 
 
@@ -69,6 +73,13 @@ public class Gui extends Application
            }
        });
 
+        login.getCreateAccountButton().setOnAction(e ->
+        {
+            showCreateAccountScreen();
+        });
+
+
+
        Scene loginScene = new Scene(layout, 400, 500);
        primaryStage.setScene(loginScene);
     } // end of login function
@@ -76,7 +87,7 @@ public class Gui extends Application
 
     void showMainScreen()
     {
-        mainScreen = new MainScreen();
+        mainScreen = new MainScreen(banking.getAccount().getName(),banking.getAccount().getBalance(),banking.getAccount().getAccountNumber());
 
         VBox mainLayout = mainScreen.createMainMenu();
 
@@ -92,7 +103,29 @@ public class Gui extends Application
     } //end of showMainScreen function
 
 
+    void showCreateAccountScreen()
+    {
 
+        CreateAccount createAccountScreen = new CreateAccount();
+        VBox createAccountLayout = createAccountScreen.createC_Menu();
+
+
+
+        createAccountScreen.getBackButton().setOnAction(e ->
+        {
+            showLoginScreen();
+        });
+
+        createAccountScreen.getCreateButton().setOnAction(e ->
+        {
+            banking.createAccount(createAccountScreen.getName(), createAccountScreen.getPin());
+
+        });
+
+        Scene mainScene = new Scene(createAccountLayout, 400, 500);
+        primaryStage.setScene(mainScene);
+
+    }
 
 
 }//end of gui class

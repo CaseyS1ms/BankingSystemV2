@@ -45,6 +45,8 @@ public class Login
         return loginButton;
     }
 
+    public Button getCreateAccountButton(){return createAccount;}
+
     //METHODS
 
     public VBox createLoginPage()
