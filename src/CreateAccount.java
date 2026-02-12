@@ -32,7 +32,7 @@ public class CreateAccount
         Label welcome = new Label("Welcome to WIS Banking");
         createButton = new Button("Create Account");
         backButton = new Button("Back");
-        name = new TextField();
+        name = new TextField("John Doe");
         pin = new PasswordField();
         Label nameField = new Label("Name: ");
         Label pinField = new Label("Pin: ");
@@ -48,7 +48,7 @@ public class CreateAccount
 
 
         return layout;
-    }
+    }//end of ui
 
 
 

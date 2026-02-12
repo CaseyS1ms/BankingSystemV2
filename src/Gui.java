@@ -97,6 +97,24 @@ public class Gui extends Application
             showLoginScreen();
         });
 
+        mainScreen.getDeposit().setOnAction(e ->
+        {
+            showDepositScreen();
+            System.out.println("DEPOSIT");
+        });
+
+        mainScreen.getWithdraw().setOnAction(e ->
+        {
+            //show withdraw screen
+            System.out.println("WITHDRAW");
+        });
+
+        mainScreen.getSendMoney().setOnAction(e ->
+        {
+            //show send money screen
+            System.out.println("SEND MONEY");
+        });
+
         Scene mainScene = new Scene(mainLayout, 400, 500);
         primaryStage.setScene(mainScene);
 
@@ -125,6 +143,26 @@ public class Gui extends Application
         Scene mainScene = new Scene(createAccountLayout, 400, 500);
         primaryStage.setScene(mainScene);
 
+    }
+
+
+    void showDepositScreen()
+    {
+        Deposit deposit = new Deposit();
+        VBox showDepositScreen = deposit.createDepositMenu();
+
+        deposit.getBackButton().setOnAction(e ->
+        {
+            showMainScreen();
+        });
+
+        deposit.getDepositButton().setOnAction(e ->
+        {
+            banking.deposit(deposit.getAmount());
+        });
+
+        Scene depositScene = new Scene(showDepositScreen, 500, 400);
+        primaryStage.setScene(depositScene);
     }
 
 

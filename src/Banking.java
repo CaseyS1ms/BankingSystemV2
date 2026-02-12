@@ -119,6 +119,12 @@ public class Banking
 
     } //send money function
 
+    public void deposit(int amount)
+    {
+        account.deposit(amount);
+        updateAccountsList();
+    }
+
 
     public String updateAccountsList()
     {

@@ -28,10 +28,11 @@ public class MainScreen
     //GETTERS
     public Button getLogout(){return logout;}
 
+    public Button getWithdraw(){return withdraw;}
 
+    public Button getDeposit() {return deposit;}
 
-
-
+    public Button getSendMoney() {return sendMoney;}
 
     public VBox createMainMenu()
     {
