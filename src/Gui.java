@@ -113,6 +113,7 @@ public class Gui extends Application
         mainScreen.getSendMoney().setOnAction(e ->
         {
             //show send money screen
+            showSendMoneyScreen();
             System.out.println("SEND MONEY");
         });
 
@@ -183,6 +184,26 @@ public class Gui extends Application
 
         Scene withdrawScene = new Scene(showWithdrawScreen, 500, 400);
         primaryStage.setScene(withdrawScene);
+    }
+
+    void showSendMoneyScreen()
+    {
+        SendMoney sendMoney = new SendMoney();
+        VBox showSendMoneyScreen = sendMoney.createSendMoneyMenu();
+
+        sendMoney.getBackButton().setOnAction(e ->
+        {
+            showMainScreen();
+        });
+
+        sendMoney.getSendMoney().setOnAction(e ->
+        {
+            banking.sendmoney(sendMoney.getAmount(), sendMoney.getAccountNumber());
+        });
+
+        Scene sendMoneyScene = new Scene(showSendMoneyScreen, 500, 400);
+        primaryStage.setScene(sendMoneyScene);
+
     }
 
 
