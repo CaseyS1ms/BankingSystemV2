@@ -123,6 +123,12 @@ public class Banking
     {
         account.deposit(amount);
         updateAccountsList();
+    } //deposit function wrapper
+
+    public void withdraw(int amount)
+    {
+        account.withdraw(amount);
+        updateAccountsList();
     }
 
 

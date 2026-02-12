@@ -106,6 +106,7 @@ public class Gui extends Application
         mainScreen.getWithdraw().setOnAction(e ->
         {
             //show withdraw screen
+            showWithdrawScreen();
             System.out.println("WITHDRAW");
         });
 
@@ -163,6 +164,25 @@ public class Gui extends Application
 
         Scene depositScene = new Scene(showDepositScreen, 500, 400);
         primaryStage.setScene(depositScene);
+    }//end of deposit function
+
+    void showWithdrawScreen()
+    {
+        Withdraw withdraw = new Withdraw();
+        VBox showWithdrawScreen = withdraw.createWithdrawMenu();
+
+        withdraw.getBackButton().setOnAction(e ->
+        {
+            showMainScreen();
+        });
+
+        withdraw.getWithdrawButton().setOnAction(e ->
+        {
+            banking.withdraw(withdraw.getAmount());
+        });
+
+        Scene withdrawScene = new Scene(showWithdrawScreen, 500, 400);
+        primaryStage.setScene(withdrawScene);
     }
 
 
