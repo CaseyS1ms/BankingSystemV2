@@ -35,12 +35,12 @@ public class Login
         return acc_N;
     }
 
-//    public String pinNumber()
-//    {
-//        String pinNumberIn = pinNumber.getText();
-//
-//        return pinNumberIn;
-//    }
+    public String pinNumber()
+    {
+        String pinNumberIn = pinNumber.getText();
+
+        return pinNumberIn;
+    }
 
     public Button getLoginButton() {return loginButton;}
 
