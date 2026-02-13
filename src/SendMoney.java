@@ -1,3 +1,5 @@
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 
@@ -25,6 +27,9 @@ public class SendMoney
     public VBox createSendMoneyMenu()
     {
         VBox layout = new VBox();
+        layout.setSpacing(10);
+        layout.setPadding(new Insets(10));
+        layout.setAlignment(Pos.CENTER);
 
         sendMoney= new Button("Send");
         backButton = new Button("Back");

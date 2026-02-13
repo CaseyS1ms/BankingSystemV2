@@ -3,16 +3,17 @@ import javafx.scene.Scene;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+import java.util.ArrayList;
+
 public class Gui extends Application
 {
 
 
 
-    private Login login;
     private Banking banking;
     private MainScreen mainScreen;
-    private CreateAccount createAccountScreen;
     private Stage primaryStage;
+    private ArrayList<String> history;
 
     public Gui()
     {
@@ -117,6 +118,12 @@ public class Gui extends Application
             System.out.println("SEND MONEY");
         });
 
+        mainScreen.getTransactionHistory().setOnAction(e ->
+        {
+            //show transaction History
+            showTransactionHistory();
+        });
+
         Scene mainScene = new Scene(mainLayout, 400, 500);
         primaryStage.setScene(mainScene);
 
@@ -204,6 +211,24 @@ public class Gui extends Application
         Scene sendMoneyScene = new Scene(showSendMoneyScreen, 500, 400);
         primaryStage.setScene(sendMoneyScene);
 
+    }
+
+    void showTransactionHistory()
+    {
+        banking.loadCurrentTransactionHistory();
+
+        history = banking.getTransactionHistory();
+        TransactionHistory transactionHistory = new TransactionHistory(history);
+        VBox showTransactionHistory = transactionHistory.createTransactionListScreen();
+
+
+        transactionHistory.getBackButton().setOnAction(e ->
+        {
+            showMainScreen();
+        });
+
+        Scene transactionHistoryScene = new Scene(showTransactionHistory, 500, 400);
+        primaryStage.setScene(transactionHistoryScene);
     }
 
 

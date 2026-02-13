@@ -75,10 +75,10 @@ public class Banking
     } //login function
 
 
-    public void logout()
-    {
-        account = null;
-    } //logout function
+//    public void logout()
+//    {
+//        account = null;
+//    } //logout function
 
 
 
@@ -171,4 +171,15 @@ public class Banking
         }
         return "Success";
     }
+
+    public ArrayList<String> getTransactionHistory()
+    {
+        return account.getTransactionH();
+    }
+
+    public String loadCurrentTransactionHistory()
+    {
+        return account.loadTransactionHistory();
+    }
+
 } // Banking Class

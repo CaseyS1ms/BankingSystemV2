@@ -1,8 +1,11 @@
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Random;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Scanner;
 
 public class Account
 {
@@ -13,6 +16,7 @@ public class Account
     private int balance;
     private String pin;
     private ArrayList<String> transactionH;
+
 
     public Account(int accountNumber, String name, int balance, String pin)
     {
@@ -46,6 +50,11 @@ public class Account
         return pin;
     }
 
+    public ArrayList<String> getTransactionH()
+    {
+        return transactionH;
+    }
+
 
 
 
@@ -76,15 +85,15 @@ public class Account
 
     }//withdraw function
 
-    public void transactionHistory()
-    {
-        for(String t: transactionH)
-        {
-            System.out.println(t);
-        }
-
-
-    }//transaction history
+//    public void transactionHistory()
+//    {
+//        for(String t: transactionH)
+//        {
+//            System.out.println(t);
+//        }
+//
+//
+//    }//transaction history
 
     public Integer checkBalance()
     {
@@ -103,10 +112,10 @@ public class Account
 
 
 
-    public void accountDetails()
-    {
-        System.out.println("name: " + this.name + "\naccount number: " + this.accountNumber);
-    }
+//    public void accountDetails()
+//    {
+//        System.out.println("name: " + this.name + "\naccount number: " + this.accountNumber);
+//    }
 
 
     public void updateTransactionHistory(int amount,String type)
@@ -128,6 +137,29 @@ public class Account
         {
             System.out.println("An Error has Occurred");
         }
+    }
+
+    public String loadTransactionHistory()
+    {
+
+        File accL = new File("//Users//caseysims//IdeaProjects//BankingSystemV2//transactionHistory//" + this.accountNumber + "History.txt");
+        transactionH.clear();
+
+        try(Scanner read = new Scanner(accL))
+        {
+            while(read.hasNextLine())
+            {
+                String data = read.nextLine();
+                transactionH.add(data);
+
+
+            }
+        }
+        catch (FileNotFoundException e)
+        {
+            return "File Not Found";
+        }
+        return "Success";
     }
 
 

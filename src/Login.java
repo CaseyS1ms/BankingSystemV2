@@ -1,5 +1,7 @@
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 
 public class Login
 {
@@ -12,7 +14,6 @@ public class Login
     private int width;
     private int height;
 
-    private Gui gui;
 
 
     public Login()
@@ -30,20 +31,18 @@ public class Login
     {
         int acc_N = Integer.parseInt(accountNumber.getText());
 
+
         return acc_N;
     }
 
-    public String pinNumber()
-    {
-        String pinNumberIn = pinNumber.getText();
+//    public String pinNumber()
+//    {
+//        String pinNumberIn = pinNumber.getText();
+//
+//        return pinNumberIn;
+//    }
 
-        return pinNumberIn;
-    }
-
-    public Button getLoginButton()
-    {
-        return loginButton;
-    }
+    public Button getLoginButton() {return loginButton;}
 
     public Button getCreateAccountButton(){return createAccount;}
 
@@ -52,6 +51,9 @@ public class Login
     public VBox createLoginPage()
     {
         VBox layout = new VBox();
+        layout.setSpacing(10);
+        layout.setPadding(new Insets(10));
+        layout.setAlignment(Pos.CENTER);
         Label welcomeLabel = new Label("Welcome To WIS Banking");
         Label accountLabel = new Label("Account Number: ");
         Label PinLabel = new Label("Pin Number: ");

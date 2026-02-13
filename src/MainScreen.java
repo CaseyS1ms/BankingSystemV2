@@ -1,3 +1,5 @@
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 
@@ -19,11 +21,13 @@ public class MainScreen
     }
 
 
-    private Label accountNumber;
+//    private Label accountNumber;
+
     private Button logout;
     private Button withdraw;
     private Button deposit;
     private Button sendMoney;
+    private Button transactionHistory;
 
     //GETTERS
     public Button getLogout(){return logout;}
@@ -34,9 +38,14 @@ public class MainScreen
 
     public Button getSendMoney() {return sendMoney;}
 
+    public Button getTransactionHistory() {return transactionHistory;}
+
     public VBox createMainMenu()
     {
         VBox layout = new VBox();
+        layout.setSpacing(10);
+        layout.setPadding(new Insets(10));
+        layout.setAlignment(Pos.CENTER);
         Label welcomeLabel = new Label("WIS Banking");
         Label info1Label = new Label("Balance: £" + balance);
         Label info2Label = new Label("Account Number: " + loggedAccountNumber);
@@ -45,6 +54,7 @@ public class MainScreen
         withdraw = new Button("Withdraw");
         deposit = new Button("Deposit");
         sendMoney = new Button("Send Money");
+        transactionHistory = new Button("Transaction History");
 
 
 
@@ -57,6 +67,7 @@ public class MainScreen
         layout.getChildren().add(deposit);
         layout.getChildren().add(withdraw);
         layout.getChildren().add(sendMoney);
+        layout.getChildren().add(transactionHistory);
         layout.getChildren().add(logout);
 
 
