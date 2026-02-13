@@ -8,7 +8,7 @@
 [Future Plans](#future-plans)  
 [Learning Outcomes](#learning-outcomes)  
 ## Overview
-## Overview
+
 A desktop banking application built in Java as a learning project alongside my university studies. This is the second iteration of the project, rebuilt from scratch to properly implement Object-Oriented Programming principles such as encapsulation and separation of concerns.
 
 The application supports multiple user accounts with persistent file-based storage. It was originally developed as a CLI application and later enhanced with a JavaFX graphical interface to strengthen my understanding of desktop UI development.
