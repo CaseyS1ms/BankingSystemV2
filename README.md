@@ -34,19 +34,25 @@ This project serves as a foundation before transitioning to full-stack developme
 
 ## Screenshots
 ### Login Screen
-![Login Screen](screenshots/LoginScreen.png)  
+<img src="https://raw.githubusercontent.com/CaseyS1ms/BankingSystemV2/main/screenshots/LoginScreen.png" alt="Login Screen" width="300">  
+
 ### Main Screen
-![Main Dashboard](screenshots/MainMenu%20Screen.png)
+<img src="https://raw.githubusercontent.com/CaseyS1ms/BankingSystemV2/main/screenshots/MainMenu Screen.png" alt="Main Screen" width="300">  
+
 ### Deposit Screen
-![Deposit Screen](screenshots/Deposit%20Screen.png)
+<img src="https://raw.githubusercontent.com/CaseyS1ms/BankingSystemV2/main/screenshots/Deposit Screen.png" alt="Deposit Screen" width="300">  
+
 ### Withdraw Screen
-![Withdraw Screen](screenshots/Withdraw%20Screen.png)
+<img src="https://raw.githubusercontent.com/CaseyS1ms/BankingSystemV2/main/screenshots/Withdraw Screen.png" alt="Withdraw Screen" width="300">  
+
 ### Send Money Screen
-![Send Money Screen](screenshots/SendMoney%20Screen.png)
+<img src="https://raw.githubusercontent.com/CaseyS1ms/BankingSystemV2/main/screenshots/SendMoney Screen.png" alt="SendMoney Screen" width="300">
+
 ### Transaction History Screen
-![Transaction History Screen](screenshots/TransactionHistory%20Screen.png)
+<img src="https://raw.githubusercontent.com/CaseyS1ms/BankingSystemV2/main/screenshots/TransactionHistory Screen.png" alt="TransactionHistory Screen" width="300"> 
+
 ### Create Account Screen
-![Create Account Screen](screenshots/CreateAccount%20Screen.png)
+<img src="https://raw.githubusercontent.com/CaseyS1ms/BankingSystemV2/main/screenshots/CreateAccount Screen.png" alt="CreateAccount Screen" width="300">  
 
 ## Project Structure
 ### Presentation Layer
