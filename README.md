@@ -5,6 +5,7 @@
 [Technology used](#technology-used)  
 [Screenshots](#screenshots)  
 [Project Structure](#project-structure)  
+[Class Diagram](#class-diagram)
 [Future Plans](#future-plans)  
 [Learning Outcomes](#learning-outcomes)  
 ## Overview
