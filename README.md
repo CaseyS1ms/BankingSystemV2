@@ -8,7 +8,6 @@
 [Future Plans](#future-plans)  
 [Learning Outcomes](#learning-outcomes)  
 ## Overview
-
 A desktop banking application built in Java as a learning project alongside my university studies. This is the second iteration of the project, rebuilt from scratch to properly implement Object-Oriented Programming principles such as encapsulation and separation of concerns.
 
 The application supports multiple user accounts with persistent file-based storage. It was originally developed as a CLI application and later enhanced with a JavaFX graphical interface to strengthen my understanding of desktop UI development.
@@ -63,6 +62,8 @@ This project serves as a foundation before transitioning to full-stack developme
 `Banking.java` - Core banking operations (login, account management, transactions)  
 ### Data Model
 `Accounts.java` - Account entity with balance, transactions such as deposit and withdraw, and file persistence
+## Class Diagram
+![Class Diagram](documentation/BankingSystemClassDiagram.png)
 ## Future Plans
 - Rebuild as a full-stack web application with:  
 - **Frontend:** React-based user-interface
