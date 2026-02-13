@@ -44,7 +44,7 @@ public class MainScreen
     {
         VBox layout = new VBox();
         layout.setSpacing(10);
-        layout.setPadding(new Insets(10));
+        layout.setPadding(new Insets(100));
         layout.setAlignment(Pos.CENTER);
         Label welcomeLabel = new Label("WIS Banking");
         Label info1Label = new Label("Balance: £" + balance);

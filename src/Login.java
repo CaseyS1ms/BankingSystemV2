@@ -51,7 +51,7 @@ public class Login
     public VBox createLoginPage()
     {
         VBox layout = new VBox();
-        layout.setSpacing(10);
+        layout.setSpacing(25);
         layout.setPadding(new Insets(10));
         layout.setAlignment(Pos.CENTER);
         Label welcomeLabel = new Label("Welcome To WIS Banking");
